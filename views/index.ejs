@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cocktail Finder</title>
+
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>🍹 Cocktail Recipe Finder</h1>
+
+    <form action="/search" method="POST">
+
+      <input
+        type="text"
+        name="cocktail"
+        placeholder="Enter cocktail name"
+        required
+      >
+
+      <button type="submit">
+        Search
+      </button>
+
+    </form>
+
+    <form action="/" method="GET">
+
+  <button type="submit">
+    Random Cocktail
+  </button>
+
+    </form>
+
+    <% if (typeof error !== 'undefined') { %>
+
+      <h2 class="error"><%= error %></h2>
+
+    <% } %>
+
+    <% if (typeof cocktail !== 'undefined') { %>
+
+      <div class="card">
+
+        <img
+          src="<%= cocktail.strDrinkThumb %>"
+          alt="cocktail image"
+        >
+
+        <h2><%= cocktail.strDrink %></h2>
+
+        <p>
+          <strong>Category:</strong>
+          <%= cocktail.strCategory %>
+        </p>
+
+        <p>
+          <strong>Type:</strong>
+          <%= cocktail.strAlcoholic %>
+        </p>
+
+        <h3>Ingredients</h3>
+
+<ul>
+
+  <% for(let i = 1; i <= 15; i++) { %>
+
+    <% if(cocktail[`strIngredient${i}`]) { %>
+
+      <li>
+        <%= cocktail[`strIngredient${i}`] %> - <%= cocktail[`strMeasure${i}`] || "" %>
+      </li>
+
+    <% } %>
+
+  <% } %>
+
+</ul>
+
+        <p>
+          <strong>Instructions:</strong>
+        </p>
+
+        <p>
+          <%= cocktail.strInstructions %>
+        </p>
+
+      </div>
+
+    <% } %>
+
+  </div>
+
+
+  <footer>
+
+  <p>
+    Made with ❤️ using Express.js, Axios & EJS <br>
+    © <%= new Date().getFullYear() %>
+  </p>
+  </footer>
+</body>
+</html>
